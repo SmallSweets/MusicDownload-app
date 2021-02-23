@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from PIL import ImageTk
-import downloadwindow as download
+import DownloadWindow as download
 
 # 存储注册成功用户名及密码
 success = []
@@ -13,7 +13,7 @@ window.geometry("900x660")
 
 # 背景画布
 canvas = tk.Canvas(window,width=900,height=500)
-image_file = ImageTk.PhotoImage(file="title2.jpg")
+image_file = ImageTk.PhotoImage(file="Login.jpg")
 image = canvas.create_image(0,0,anchor="nw",image=image_file)
 canvas.pack()
 

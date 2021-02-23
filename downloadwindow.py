@@ -1,6 +1,5 @@
 import tkinter as tk
-import 爬取酷狗音乐 as private
-
+import GetMusicInfo as private
 
 search_user_input = ""
 next_or_before = ""
@@ -31,6 +30,12 @@ def search_f():
                 a[i].destroy()
     # 如果是新的搜索关键词，则从0开始遍历
     else:
+        # 重新搜索时，摧毁前一次搜索显示的checkbutton
+        try:
+            for i in range(15*times,15*(times+1)):
+                a[i].destroy()
+        except:
+            pass
         private.search_music_url_all = []
         start_number = 0
         private.show_music_info_list = []
@@ -38,6 +43,7 @@ def search_f():
         page = 0
         loading_page = -1
 
+    # 列表中的数据可供循环两次，循环两次后重新获取新数据
     if times % 2 == 0 and times > loading_page:
         page += 1
         music_url_list = private.music_get_url(download_name,page)
@@ -63,6 +69,7 @@ def search_f():
         else:
             a[i].place(x=20,y=100+height*30)
 
+# 点击下一页执行的函数
 def next_page():
     global times
     global next_or_before
@@ -70,6 +77,7 @@ def next_page():
     times += 1
     search_f()
 
+# 点击上一页执行的函数
 def before_page():
     global times
     global next_or_before
@@ -77,6 +85,7 @@ def before_page():
     times -= 1
     search_f()
 
+# 点击下载按钮执行的函数
 b = {}
 def download_button_f():
     all_url_list = private.search_music_url_all
@@ -84,7 +93,7 @@ def download_button_f():
         b[i] = checkbuttonval[i].get()
         if(b[i] != 0):
             download_info_text.insert("end","正在下载 "+show_music_info_list[b[i]-1]+"\n")
-            result = private.Preservation(all_url_list[b[i]-1],"D:/") + "\n"
+            result = private.Preservation(all_url_list[b[i]-1],"D:/111/") + "\n"
             download_info_text.insert("end",result)
 
 def main():
